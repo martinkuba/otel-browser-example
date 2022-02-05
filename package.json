@@ -1,0 +1,24 @@
+{
+  "name": "otel-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@opentelemetry/api": "^1.1.0",
+    "@opentelemetry/context-zone": "^1.0.1",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.27.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "^0.27.0",
+    "@opentelemetry/instrumentation-document-load": "^0.27.1",
+    "@opentelemetry/instrumentation-fetch": "^0.27.0",
+    "@opentelemetry/instrumentation-long-task": "^0.27.0",
+    "@opentelemetry/instrumentation-user-interaction": "^0.28.1",
+    "@opentelemetry/instrumentation-xml-http-request": "^0.27.0",
+    "@opentelemetry/sdk-trace-web": "^1.0.1"
+  }
+}

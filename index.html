@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Example</title>
+  <base href="/">
+  <!--
+    https://www.w3.org/TR/trace-context/
+    Set the `traceparent` in the server's HTML template code. It should be
+    dynamically generated server side to have the server's request trace Id,
+    a parent span Id that was set on the server's request span, and the trace
+    flags to indicate the server's sampling decision
+    (01 = sampled, 00 = notsampled).
+    '{version}-{traceId}-{spanId}-{sampleDecision}'
+  -->
+  <!-- <meta name="traceparent" content="00-ab42124a3c573678d4d8b21ba52df3bf-d21f7bc17caa5aba-01"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <script type="module" src="document-load.js"></script>
+  <!-- <script type="module" src="interaction.js"></script> -->
+
+  <button id="btn1">make fetch call</button>
+  <button id="btn2">make XHR call</button>
+  <button id="btn3">generate long task</button>
+
+  <script>
+    const btn1 = document.getElementById('btn1')
+    btn1.addEventListener('click', makeFetchCall)
+
+    const btn2 = document.getElementById('btn2')
+    btn2.addEventListener('click', makeXhrCall)
+
+    const btn3 = document.getElementById('btn3')
+    btn3.addEventListener('click', generateLongTask)
+
+    function makeFetchCall() {
+      window.location.hash = Math.random()
+      fetch('/json');
+    }
+
+    function makeXhrCall() {
+      function reqListener () {
+        console.log(this.response);
+      }
+
+      var req = new XMLHttpRequest();
+      req.responseType = 'json'
+      req.addEventListener("load", reqListener);
+      req.open("GET", "/json");
+      req.send();
+    }
+
+    function generateLongTask() {
+      var start = Date.now()
+      while ((Date.now() - start) < 60) {}
+    }
+  </script>
+</body>
+</html>
